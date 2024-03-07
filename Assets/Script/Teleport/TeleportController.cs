@@ -9,6 +9,7 @@ public class TeleportController : MonoBehaviour
     private bool isOpened;
     [SerializeField] private Button teleButton;
     [SerializeField] private GameObject teleBtnMenu;
+    private bool isFirstTouch = true;
 
     private Animator animator;
     // Start is called before the first frame update
@@ -35,9 +36,12 @@ public class TeleportController : MonoBehaviour
     {
         if (collision != null)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.gameObject.CompareTag("Player"))
             {
-                transform.Translate(new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
+                if(isFirstTouch)
+                {
+                    transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+                }
                 isOpened = true;
                 teleBtnMenu.SetActive(true);
                 Time.timeScale = 0;
@@ -49,7 +53,7 @@ public class TeleportController : MonoBehaviour
     {
         if (Vector2.Distance(Player.transform.position, transform.position) > 0.5f)
         {
-            Player.transform.position = new Vector2(transform.position.x + 1.5f, transform.position.y);
+            Player.transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 1f);
         }
         teleBtnMenu.SetActive(false);
         Time.timeScale = 1;
