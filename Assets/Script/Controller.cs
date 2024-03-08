@@ -34,11 +34,12 @@ public class Controller : MonoBehaviour
 
     //??n
     public GameObject bulletPrefab;
-    public float bulletSpeed = 50f;
-
-    
+    public float bulletSpeed = 10f;
 
 
+
+    //firepoint
+    public GameObject firePoint;
 
 
     float movePrefix = 6;
@@ -56,25 +57,25 @@ public class Controller : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //??i tr?ng l?c
-        if(collision.gameObject.CompareTag("Wall180"))
-        {
-            if(rb !=null)
-            {
-                rb.gravityScale = -2;
-                rb.AddForce(newgravity.normalized * rb.mass * Physics2D.gravity.magnitude, ForceMode2D.Force);
-                isgravitychange = true;
-            }
-        }
-        if (collision.gameObject.CompareTag("nonWall"))
-        {
+        //if(collision.gameObject.CompareTag("Wall180"))
+        //{
+        //    if(rb !=null)
+        //    {
+        //        rb.gravityScale = -2;
+        //        rb.AddForce(newgravity.normalized * rb.mass * Physics2D.gravity.magnitude, ForceMode2D.Force);
+        //        isgravitychange = true;
+        //    }
+        //}
+        //if (collision.gameObject.CompareTag("nonWall"))
+        //{
 
-            if (rb != null)
-            {
-                rb.gravityScale = 1;
-                rb.AddForce(newgravity.normalized * rb.mass * Physics2D.gravity.magnitude, ForceMode2D.Force);
-                isgravitychange = false;
-            }
-        }
+        //    if (rb != null)
+        //    {
+        //        rb.gravityScale = 1;
+        //        rb.AddForce(newgravity.normalized * rb.mass * Physics2D.gravity.magnitude, ForceMode2D.Force);
+        //        isgravitychange = false;
+        //    }
+        //}
 
         if(collision.gameObject.CompareTag("Ground"))
         {
@@ -85,13 +86,13 @@ public class Controller : MonoBehaviour
             }
         } 
         
-        if(collision.gameObject.CompareTag("Vground"))
-        {
-            if(rb != null)
-            {
-                isclimb90 = true;
-            }
-        }
+        //if(collision.gameObject.CompareTag("Vground"))
+        //{
+        //    if(rb != null)
+        //    {
+        //        isclimb90 = true;
+        //    }
+        //}w
        
 
 
@@ -105,7 +106,6 @@ public class Controller : MonoBehaviour
     void Update()
     {
         moveH = Input.GetAxis("Horizontal");
-        moveV = Input.GetAxis("Vertical");
 
         if(!isclimb90)
         {
@@ -154,7 +154,7 @@ public class Controller : MonoBehaviour
             isjump = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             animator.SetTrigger("RangedAttack");
             Shoot();
@@ -183,7 +183,7 @@ public class Controller : MonoBehaviour
 
 
             //rb.AddForce(new Vector2(DashForce, 0f), ForceMode2D.Impulse);
-            animator.SetTrigger("Dash");
+            //animator.SetTrigger("Dash");
         }
 
        
@@ -212,7 +212,7 @@ public class Controller : MonoBehaviour
         mousePosition.z = 0f;
 
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, Quaternion.identity);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 

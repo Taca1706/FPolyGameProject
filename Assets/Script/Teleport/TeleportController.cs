@@ -41,21 +41,22 @@ public class TeleportController : MonoBehaviour
                 if(isFirstTouch)
                 {
                     transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+                    isFirstTouch = false;
                 }
                 isOpened = true;
                 teleBtnMenu.SetActive(true);
-                Time.timeScale = 0;
                 animator.SetBool("isTouch", true);
+                Time.timeScale = 0f;
             }
         }
     }
     public void TeleportToPoint()
     {
-        if (Vector2.Distance(Player.transform.position, transform.position) > 0.5f)
+        if (Vector2.Distance(Player.transform.position, transform.position) > 1f)
         {
-            Player.transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 1f);
+            Player.transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y + 1f);
+            teleBtnMenu.SetActive(false);
+            Time.timeScale = 1f;
         }
-        teleBtnMenu.SetActive(false);
-        Time.timeScale = 1;
     }
 }

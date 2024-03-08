@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public GameObject _iventoryPanel;
     public GameObject _storePanel;
     public GameObject _skillPanel;
+    public GameObject _miniMap;
 
     // Update is called once per frame
     void Update()
@@ -27,12 +28,17 @@ public class UIManager : MonoBehaviour
         {
             ReturnGame();
         }
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            MiniMap();
+        }
     }
     public void IventoryPanel()
     {
         _iventoryPanel.SetActive(true);
         _storePanel.SetActive(false);
         _skillPanel.SetActive(false);
+        _miniMap.SetActive(false);
         Time.timeScale = 0;
     }
 
@@ -41,6 +47,7 @@ public class UIManager : MonoBehaviour
         _iventoryPanel.SetActive(false);
         _storePanel.SetActive(true);
         _skillPanel.SetActive(false);
+        _miniMap.SetActive(false);
         Time.timeScale = 0;
     }
     public void SkillPanel()
@@ -48,6 +55,7 @@ public class UIManager : MonoBehaviour
         _iventoryPanel.SetActive(false);
         _storePanel.SetActive(false);
         _skillPanel.SetActive(true);
+        _miniMap.SetActive(false);
         Time.timeScale = 0;
     }
     public void ReturnGame()
@@ -55,7 +63,16 @@ public class UIManager : MonoBehaviour
         _iventoryPanel.SetActive(false);
         _storePanel.SetActive(false);
         _skillPanel.SetActive(false);
+        _miniMap.SetActive(false);
         Time.timeScale = 1;
+    }
+    public void MiniMap()
+    {
+        _iventoryPanel.SetActive(false);
+        _storePanel.SetActive(false);
+        _skillPanel.SetActive(false);
+        _miniMap.SetActive(true);
+        Time.timeScale = 0;
     }
 
 }
