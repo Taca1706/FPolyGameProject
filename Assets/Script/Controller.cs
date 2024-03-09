@@ -50,10 +50,13 @@ public class Controller : MonoBehaviour
 
     float movePrefix = 6;
 
+    public int coinValue;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        coinValue = 0;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -98,15 +101,23 @@ public class Controller : MonoBehaviour
         //    {
         //        isclimb90 = true;
         //    }
-        //}w
-       
-
-
-
+        //}
     }
 
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            coinValue += 1000;
+            Destroy(collision.gameObject);
+        }
 
+        if(collision.gameObject.CompareTag("EnemyBullet"))
+        {
+            hp.RemoveHealth(1);
+        }
+    }
 
 
     void Update()
@@ -195,7 +206,7 @@ public class Controller : MonoBehaviour
             //animator.SetTrigger("Dash");
         }
 
-       
+        goldText.text = "" + coinValue;
 
     }
 

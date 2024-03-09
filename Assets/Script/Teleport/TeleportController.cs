@@ -45,9 +45,7 @@ public class TeleportController : MonoBehaviour
                     isFirstTouch = false;
                 }
                 isOpened = true;
-                teleBtnMenu.SetActive(true);
                 animator.SetBool("isTouch", true);
-                Time.timeScale = 0f;
             }
         }
     }
