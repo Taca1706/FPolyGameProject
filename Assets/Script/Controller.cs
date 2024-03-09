@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+
+    [SerializeField] private HPSystemController hp;
+    [SerializeField] private HPSystemController mana;
+
+    [SerializeField] private Text goldText;
 
     //Thông s?
     public float Spd = 6f;
@@ -34,7 +40,7 @@ public class Controller : MonoBehaviour
 
     //??n
     public GameObject bulletPrefab;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 2f;
 
 
 
@@ -125,8 +131,11 @@ public class Controller : MonoBehaviour
             isclimb90 = false;
             animator.SetBool("Isclimb90", false);
         }
-        
 
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            RecoverHPByMana();
+        }
         
 
 
@@ -219,5 +228,11 @@ public class Controller : MonoBehaviour
         Vector2 direction = (mousePosition - transform.position).normalized;
 
         rb.velocity = direction * bulletSpeed;
+    }
+
+    public void RecoverHPByMana()
+    {
+        hp.AddHealth(2);
+        mana.RemoveHealth(1);
     }
 }

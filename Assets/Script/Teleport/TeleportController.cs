@@ -10,6 +10,7 @@ public class TeleportController : MonoBehaviour
     [SerializeField] private Button teleButton;
     [SerializeField] private GameObject teleBtnMenu;
     private bool isFirstTouch = true;
+    [SerializeField] private HPSystemController mana;
 
     private Animator animator;
     // Start is called before the first frame update
@@ -54,9 +55,10 @@ public class TeleportController : MonoBehaviour
     {
         if (Vector2.Distance(Player.transform.position, transform.position) > 1f)
         {
-            Player.transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y + 1f);
+            Player.transform.position = new Vector3(transform.position.x + 3f, transform.position.y + 1f);
             teleBtnMenu.SetActive(false);
             Time.timeScale = 1f;
+            mana.AddHealth(6);
         }
     }
 }
